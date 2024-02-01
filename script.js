@@ -18,6 +18,7 @@ buttons.addEventListener("click", function (e) {
 
   computerChoose();
   playGame();
+  startHandAnimation();
 });
 
 function computerChoose() {
@@ -36,9 +37,26 @@ function computerChoose() {
 function playGame() {
   if (playerschoice === computerschoice) {
     console.log("draw");
+    result = "draw";
   } else if ((playerschoice === "rock" && computerschoice === "scissors") || (playerschoice === "scissors" && computerschoice === "paper") || (playerschoice === "paper" && computerschoice === "rock")) {
     console.log("win");
+    result = "win";
   } else {
     console.log("lose");
+    result = "lose";
   }
+}
+
+function startHandAnimation() {
+  player1.classList.add("shake");
+  player2.classList.add("shake");
+  player1.addEventListener("animationend", handAnimationEnd);
+}
+
+function handAnimationEnd() {
+  player1.classList.remove("shake");
+  player2.classList.remove("shake");
+
+  player1.classList.add(playerschoice);
+  player2.classList.add(computerschoice);
 }
